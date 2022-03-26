@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class gameManager : MonoBehaviour {
     //Timer Variables (made public).
-    public Text time;
+    public TextMeshProUGUI time;
     public float timer = 30;
     public float restartDelay = 1f;
 
