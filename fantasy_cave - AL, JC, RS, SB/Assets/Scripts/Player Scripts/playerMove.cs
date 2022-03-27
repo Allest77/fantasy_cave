@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerMove : MonoBehaviour {
     //Variables for Player Controls
@@ -20,6 +21,9 @@ public class playerMove : MonoBehaviour {
     //Vector3 Gravity Variables: Multiplies the player's fall speed when detecting a falling state.
     public Vector3 gravity;
     public Vector3 fastFall;
+
+    //Collectible
+    public float points;
 
     void Start() {
         //Need player's rigidbody
