@@ -876,11 +876,13 @@ MonoBehaviour:
   speed: 9.5
   jumpHeight: 9.8
   jumpForce: 20
-  gravity: -20
-  gravityMod: 2
+  jumpApex: -10
+  gravityMod: 15
   isGrounded: 1
   hasYellow: 0
   anim: {fileID: 0}
+  gravity: {x: 0, y: 0, z: 0}
+  fastFall: {x: 0, y: 0, z: 0}
 --- !u!54 &528005868
 Rigidbody:
   m_ObjectHideFlags: 0
