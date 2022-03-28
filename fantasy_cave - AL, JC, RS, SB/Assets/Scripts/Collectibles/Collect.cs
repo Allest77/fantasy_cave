@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Collect : MonoBehaviour {
-    void Update() { transform.Rotate(0, 0, 90 * Time.deltaTime); }
+    void Update() { transform.Rotate(90, 0, 0 * Time.deltaTime); }
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {

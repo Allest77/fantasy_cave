@@ -24,6 +24,7 @@ public class playerMove : MonoBehaviour {
 
     //Collectible
     public float points;
+    int coin;
 
     void Start() {
         //Need player's rigidbody
