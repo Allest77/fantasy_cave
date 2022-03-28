@@ -8,7 +8,7 @@ using TMPro;
 public class gameManager : MonoBehaviour {
     //Timer Variables (made public):
     public TextMeshProUGUI time;
-    public float timer = 30;
+    public float timer = 0.00f;
     public float restartDelay = 1f;
 
     public Material material, material2;
@@ -38,7 +38,7 @@ public class gameManager : MonoBehaviour {
 
     void Update() {
         //Timer updates per frame and displays it through text.
-        timer -= Time.deltaTime;
+        timer += Time.deltaTime;
         time.text = "" + timer.ToString("f2");
 
         //Press the escape key to pause the game.
