@@ -16,7 +16,7 @@ public class Coins : MonoBehaviour {
             coins += 1;
             coinCounter.text = "x: " + coins.ToString();
             Destroy(gameObject);
-            Debug.Log("Nope");
+            Debug.Log("Mon-e");
         }
     }
 }
