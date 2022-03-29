@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class followingPlayer : MonoBehaviour {
     //Publics
-    public Transform playerTarget;
-    public float smoothSpeed = 0.15f;
+    public float smoothSpeed = 0.15f, smooth = 0.95f;
+    public playerMove player;
 
     //Privates
     private Transform target;
     private Vector3 offset;
 
     void Start() {
+        player.rb = player.GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         offset = transform.position - target.position;
     }
 
-    void LateUpdate() {
-        transform.LookAt(playerTarget);
-
+    void FixedUpdate() {
         Vector3 desiredPosition = transform.position = target.position + offset;
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        player.rb.MovePosition(transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed));
     }
 }

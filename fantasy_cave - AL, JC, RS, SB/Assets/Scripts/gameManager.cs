@@ -6,33 +6,39 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 public class gameManager : MonoBehaviour {
-    //Timer Variables (made public).
+    //Timer Variables (made public):
     public TextMeshProUGUI time;
-    public float timer = 30;
+    public float timer = 0.00f;
     public float restartDelay = 1f;
 
+    public Material material, material2;
+    public float changeInterval = 0.01f;
+    public bool isUsingPower = true; //This bool is to make sure the IEnumerator is only fired once and not every frame.
+
+    //Game State Variables (Paused, Complete, etc.):
     bool gameHasEnded = false;
     public static bool GameIsPaused = false;
 
-    //Pause Variables (made public).
+    //Pause Variables:
     public GameObject pauseMenuUI;
     public GameObject completeLevelUI;
     public LayerMask UILayer;
 
-    //Change Material (For Phasing Platform Material)
+    //Reference to the player script:
     public playerMove player;
-    //public Renderer render;
-    public Material material, material2;
+
+    //Power Up Variables: List of References.
+    public BoxCollider yellowBlock;
 
     void Start() {
         Cursor.visible = true;
         player = GameObject.FindObjectOfType<playerMove>();
-        //render = GetComponent<Renderer>();
+        yellowBlock = GetComponent<BoxCollider>();
     }
 
     void Update() {
         //Timer updates per frame and displays it through text.
-        timer -= Time.deltaTime;
+        timer += Time.deltaTime;
         time.text = "" + timer.ToString("f2");
 
         //Press the escape key to pause the game.
@@ -46,12 +52,22 @@ public class gameManager : MonoBehaviour {
         }
 
         //If the player has the power up, change their material.
-        /*if (player.hasYellow) {
-            //render.material = material2;
+        if (player.hasYellow) {
+            yellowBlock.isTrigger = true;
+            material = material2;
+            if (isUsingPower) {
+                StartCoroutine("PowerUpTime");
+            }
         }
         else {
-            //render.material = material;
-        }*/
+            material = material;
+        }
+    }
+
+    IEnumerator PowerUpTime() {
+        isUsingPower = false;
+        yield return new WaitForSeconds(15);
+        player.hasYellow = false;
     }
 
     //Method when pressing button.
