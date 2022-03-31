@@ -30,6 +30,16 @@ public class gameManager : MonoBehaviour {
     //Power Up Variables: List of References.
     public BoxCollider yellowBlock;
 
+    //Score Display:
+    public TextMeshProUGUI scoreText, highScoreText;
+    int score = 0, highscore = 0;
+
+    //Awake is for when the player collides with something, add it to the score:
+    private void Awake()
+    {
+        
+    }
+
     void Start() {
         Cursor.visible = true;
         player = GameObject.FindObjectOfType<playerMove>();
@@ -68,6 +78,11 @@ public class gameManager : MonoBehaviour {
         isUsingPower = false;
         yield return new WaitForSeconds(15);
         player.hasYellow = false;
+    }
+
+    public void AddPoint() {
+        score += 100;
+        scoreText.text = score.ToString() + " Score:";
     }
 
     //Method when pressing button.

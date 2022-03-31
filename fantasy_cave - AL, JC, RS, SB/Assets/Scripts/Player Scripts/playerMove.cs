@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class playerMove : MonoBehaviour {
     //Variables for Player Controls
-    public float speed = 7.5f, jumpHeight = 10.8f, jumpForce = 10.5f, jumpApex = 10.0f, gravityMod = 2.0f;
+    public float speed = 7.5f, jumpHeight = 10.8f, jumpForce = 10.5f, jumpApex = 10.0f, gravityMod = 2.0f, fallSpeed;
     float currentVelocity, desiredVelocity;
     const float MovementPerSecond = 2.0f; //The currentVelocity will move to the desiredVelocity by this rate when called.
 
@@ -57,6 +57,10 @@ public class playerMove : MonoBehaviour {
             rb.velocity = new Vector3(0.0f, rb.velocity.y, 0.0f);
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
             ProcessMovement();
+            /*if (fallSpeed < 0)
+            {
+                anim.SetBool("isFalling", true);
+            }*/
         }
 
         //Attack
@@ -75,6 +79,7 @@ public class playerMove : MonoBehaviour {
         {
             isGrounded = true;
             //anim.SetBool("isJumping", false);
+            //anim.SetBool("isFalling", false);
         }
     }
 }
