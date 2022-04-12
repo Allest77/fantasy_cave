@@ -3390,8 +3390,8 @@ MonoBehaviour:
   UILayer:
     serializedVersion: 2
     m_Bits: 0
-  player: {fileID: 0}
-  yellowBlock: {fileID: 0}
+  player: {fileID: 666965213}
+  yellowBlock: {fileID: 666965215}
   scoreText: {fileID: 0}
   highScoreText: {fileID: 0}
 --- !u!114 &1834054340
