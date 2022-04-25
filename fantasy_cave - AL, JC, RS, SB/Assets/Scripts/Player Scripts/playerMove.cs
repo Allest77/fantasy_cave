@@ -33,7 +33,7 @@ public class playerMove : MonoBehaviour {
         //Match the two gravitys, so they don't impact the player at the same time.
         currentVelocity = gravity.y;
         desiredVelocity = currentVelocity;
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     void ProcessMovement() {
@@ -46,31 +46,31 @@ public class playerMove : MonoBehaviour {
     void Update() {
         //Movement
         float hInput = Input.GetAxis("Horizontal");
-        //anim.SetFloat("isWalking", hInput);
+        anim.SetFloat("isWalking", hInput);
         rb.transform.position = rb.transform.position + new Vector3(hInput * speed * Time.deltaTime, 0, 0);
         Debug.Log("POSITIONING");
 
         //Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
             isGrounded = false;
-            //anim.SetBool("isJumping", true);
+            anim.SetBool("isJumping", true);
             rb.velocity = new Vector3(0.0f, rb.velocity.y, 0.0f);
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
             ProcessMovement();
-            /*if (fallSpeed < 0)
+            if (fallSpeed < 0)
             {
                 anim.SetBool("isFalling", true);
-            }*/
+            }
         }
 
         //Attack
         if (Input.GetKeyDown(KeyCode.E)) {
-            //anim.SetBool("isAttacking", true);
+            anim.SetBool("isAttacking", true);
             Debug.Log("INSERT ATTACK HERE");
         }
-        /*else {
+        else {
             anim.SetBool("isAttacking", false);
-        }*/
+        }
     }
 
     //Ground Check Method
@@ -78,8 +78,8 @@ public class playerMove : MonoBehaviour {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-            //anim.SetBool("isJumping", false);
-            //anim.SetBool("isFalling", false);
+            anim.SetBool("isJumping", false);
+            anim.SetBool("isFalling", false);
         }
     }
 }
