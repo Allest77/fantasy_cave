@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class enemyController : MonoBehaviour
-{ /*{ 
+{ 
     public Transform target;
     public BoxCollider hitpoint;
 
@@ -20,6 +20,4 @@ public class enemyController : MonoBehaviour
     public void OnTriggerEnter(Collider hitpoint) {
         Destroy(hitpoint.gameObject);
     }
-}
-*/
 }
