@@ -8,7 +8,7 @@ using TMPro;
 public class gameManager : MonoBehaviour {
     //Timer Variables (made public):
     public TextMeshProUGUI time;
-    public float timer = 0.00f;
+    public float timer = 120f;
     public float restartDelay = 1f;
 
     public Material material, material2;
@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour {
     //Game State Variables (Paused, Complete, etc.):
     bool gameHasEnded = false;
     public static bool GameIsPaused = false;
+    private bool disablePause;
 
     //Pause Variables:
     public GameObject pauseMenuUI;
@@ -44,15 +45,16 @@ public class gameManager : MonoBehaviour {
         Cursor.visible = true;
         player = GameObject.FindObjectOfType<playerMove>();
         yellowBlock = GetComponent<BoxCollider>();
+        disablePause = false;
     }
 
     void Update() {
         //Timer updates per frame and displays it through text.
-        timer += Time.deltaTime;
+        timer -= Time.deltaTime;
         time.text = "" + timer.ToString("f2");
 
         //Press the escape key to pause the game.
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) && disablePause == false) {
             if (GameIsPaused) {
                 Resume(); //make a resume method
             }
@@ -63,7 +65,6 @@ public class gameManager : MonoBehaviour {
 
         //If the player has the power up, change their material.
         if (player.hasYellow) {
-            yellowBlock.isTrigger = true;
             material = material2;
             if (isUsingPower) {
                 StartCoroutine("PowerUpTime");
@@ -78,6 +79,12 @@ public class gameManager : MonoBehaviour {
         isUsingPower = false;
         yield return new WaitForSeconds(15);
         player.hasYellow = false;
+    }
+
+    public void ObjectComponentState(Collider other, bool state) {
+        other.GetComponentInChildren<MonoBehaviour>(true).enabled = state;
+        other.GetComponentInChildren<MonoBehaviour>(true).gameObject.SetActive(state);
+        other.GetComponent<MonoBehaviour>().enabled = state;
     }
 
     public void AddPoint() {
@@ -99,6 +106,10 @@ public class gameManager : MonoBehaviour {
         GameIsPaused = true;
     }
 
+    public void BackToMenu() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
     //Method when pressing button.
     public void QuitGame() {
         Application.Quit();
@@ -106,11 +117,24 @@ public class gameManager : MonoBehaviour {
 
     public void CompleteLevel() {
         completeLevelUI.SetActive(true);
+        if (!Input.GetKey(KeyCode.Escape))
+        {
+            disablePause = true;
+        }
+    }
+
+    private void FixedUpdate() {
+        if (timer < 0) {
+            GameOver();
+        }
+    }
+
+    void GameOver() {
+        SceneManager.LoadScene("GameOver");
     }
 
     public void EndGame() {
-        if (gameHasEnded == false)
-        {
+        if (gameHasEnded == false) {
             gameHasEnded = true;
             Debug.Log("GAME OVER!");
             Invoke("Restart", restartDelay);

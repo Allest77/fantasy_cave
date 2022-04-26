@@ -14,7 +14,7 @@ public class Coins : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             coins += 1;
-            coinCounter.text = "x: " + coins.ToString();
+            coinCounter.text = "Coins: " + coins.ToString();
             Destroy(gameObject);
             Debug.Log("Mon-e");
         }
