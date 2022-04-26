@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6822556123939971438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6822556123939971437}
+  - component: {fileID: 6822556123939971436}
+  - component: {fileID: 6822556123939971435}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6822556123939971437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6822556123939971438}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6822556123939971436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6822556123939971438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f0ecc42975352439f6258c2e82593b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: {fileID: 0}
+  timer: 0
+  restartDelay: 1
+  material: {fileID: 2100000, guid: 6320dd182beacde4fa452c2c3c6c09c1, type: 2}
+  material2: {fileID: 2100000, guid: aabbbee7045eaba4aa978a29baf42ffd, type: 2}
+  changeInterval: 0.01
+  isUsingPower: 1
+  pauseMenuUI: {fileID: 0}
+  completeLevelUI: {fileID: 0}
+  UILayer:
+    serializedVersion: 2
+    m_Bits: 0
+  player: {fileID: 0}
+  yellowBlock: {fileID: 0}
+  scoreText: {fileID: 0}
+  highScoreText: {fileID: 0}
+--- !u!114 &6822556123939971435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6822556123939971438}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5df3ca13ffca774c9e69c1bc499371b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DirectionalLight: {fileID: 0}
+  Preset: {fileID: 11400000, guid: 33a6d8e100a2149498cdc50eeceb925d, type: 2}
+  TimeOfDay: 8.5
