@@ -20,4 +20,9 @@ public class enemyController : MonoBehaviour
     public void OnTriggerEnter(Collider hitpoint) {
         Destroy(hitpoint.gameObject);
     }
+
+    public void Kill()
+    {
+        Destroy(gameObject);
+    }
 }
