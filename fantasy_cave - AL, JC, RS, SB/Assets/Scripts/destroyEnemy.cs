@@ -4,34 +4,14 @@ using UnityEngine;
 
 public class destroyEnemy : MonoBehaviour
 {
-    private GameObject enemies;
-    public BoxCollider box;
-    public Rigidbody rb;
-    
     
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        enemies = GameObject.FindGameObjectWithTag("Enemy");
-        box = GetComponent<BoxCollider>();
-        rb = GetComponent<Rigidbody>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.tag == "Enemy")
         {
-            var enemies = other.gameObject.GetComponent<enemyController>();
-            enemies.Kill();
+            Destroy(collision.gameObject);
         }
     }
-        
+
 }
