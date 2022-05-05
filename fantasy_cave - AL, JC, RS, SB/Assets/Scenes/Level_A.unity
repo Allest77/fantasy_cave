@@ -37033,6 +37033,18 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: b7edc6581a44e204fa2fca8e04cce96a, type: 3}
   m_PrefabInstance: {fileID: 1881223772}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1881223780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881223773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b42cc8deb86e346b74047f81542bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1882050594
 Mesh:
   m_ObjectHideFlags: 0
@@ -39607,7 +39619,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!65 &2033723586
 BoxCollider:
