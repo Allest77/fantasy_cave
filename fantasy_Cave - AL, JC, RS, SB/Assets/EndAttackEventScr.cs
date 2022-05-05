@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class EndAttackEventScr : MonoBehaviour
 {
-    
+    public Animator anim;
 }

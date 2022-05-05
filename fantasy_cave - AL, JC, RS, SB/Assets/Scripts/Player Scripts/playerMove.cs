@@ -28,26 +28,18 @@ public class playerMove : MonoBehaviour
     public float points;
     int coin;
 
-    //private OnEndAttack EndAttackAnimationEvent;
+    //Get a reference to which animator to stop.
+    private EndAttackEventScr EndAttackAnimationEvent;
 
     // called when animation event fires
-    /* public void EndAttack()
+    public void EndAttack()
     {
         anim.SetBool("isAttacking", false);
     }
 
-    void OnEnable()
-    {
-        EndAttackAnimationEvent = GetComponentInChildren<OnEndAttack>();
-        EndAttackAnimationEvent.OnPickup += Pickup;
+    void OnEnable() {
+        EndAttackAnimationEvent = GetComponentInChildren<EndAttackEventScr>();
     }
-
-    void OnDisable()
-    {
-        EndAttackAnimationEvent.OnPickup -= Pickup;
-    }*/
-
-
 
     void Start()
     {
@@ -95,7 +87,7 @@ public class playerMove : MonoBehaviour
         //Attack
         if (Input.GetKeyDown(KeyCode.E))
         {
-            anim.SetBool("isAttacking", true);
+            anim.SetTrigger("isAttacking");
             Debug.Log("INSERT ATTACK HERE");
         }
     }
