@@ -28,6 +28,19 @@ public class playerMove : MonoBehaviour
     public float points;
     int coin;
 
+    //Get a reference to which animator to stop.
+    private EndAttackEventScr EndAttackAnimationEvent;
+
+    // called when animation event fires
+    public void EndAttack()
+    {
+        anim.SetBool("isAttacking", false);
+    }
+
+    void OnEnable() {
+        EndAttackAnimationEvent = GetComponentInChildren<EndAttackEventScr>();
+    }
+
     void Start()
     {
         //Need player's rigidbody
@@ -63,29 +76,29 @@ public class playerMove : MonoBehaviour
             rb.velocity = new Vector3(0.0f, rb.velocity.y, 0.0f);
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
             ProcessMovement();
-            if (fallSpeed < 0)
-            {
-                anim.SetBool("isFalling", true);
-            }
         }
+
+        //When player falls, subtract the value and play the isFalling animation.
+        if (fallSpeed < 0) {
+                anim.SetBool("isFalling", true);
+                isGrounded = false;
+            }
 
         //Attack
         if (Input.GetKeyDown(KeyCode.E))
         {
-            anim.SetBool("isAttacking", true);
+            anim.SetTrigger("isAttacking");
             Debug.Log("INSERT ATTACK HERE");
-        }
-        else
-        {
-            anim.SetBool("isAttacking", false);
         }
     }
 
+    /* public void StopAttack() {
+        anim.SetBool("isAttacking", false);
+    }*/
+
     //Ground Check Method
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.CompareTag("Ground")) {
             isGrounded = true;
             anim.SetBool("isJumping", false);
             anim.SetBool("isFalling", false);
@@ -99,4 +112,11 @@ public class playerMove : MonoBehaviour
             hasYellow = true;
         }
     }
+
+
+
+
+
+
+    
 }
