@@ -17,7 +17,8 @@ public class followingPlayer : MonoBehaviour {
         offset = transform.position - target.position;
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         Vector3 desiredPosition = transform.position = target.position + offset;
         player.rb.MovePosition(transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed));
     }
