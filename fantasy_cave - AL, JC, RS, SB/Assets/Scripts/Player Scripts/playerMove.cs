@@ -26,7 +26,8 @@ public class playerMove : MonoBehaviour
 
     //Collectible
     public float points;
-    int coin;
+    public int coin;
+    public Coins coinCounterText;
 
     void Start()
     {
@@ -97,6 +98,12 @@ public class playerMove : MonoBehaviour
         if (other.gameObject.CompareTag("Yellow")) {
             other.gameObject.SetActive(false);
             hasYellow = true;
+        }
+
+        if (other.gameObject.tag == "coins")
+        {
+            coin = coin + 1;
+            coinCounterText.coinCounter.text = "Coins: " + coin.ToString();
         }
     }
 }

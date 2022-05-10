@@ -4,19 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Coins : MonoBehaviour {
-    int coins = 0;
+    public int coins;
     public Text coinCounter;
 
-    void Update() { 
+    void Start() {
+        coins = 0;
+        coinCounter.text = "Coins: " + coins.ToString();
+    }
+
+    void Update() {
         transform.Rotate(0, 0, 90 * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
-            coins += 1;
+    void OnTriggerEnter(Collider other) {
+        if (other.name == "Humanoid Salamander") {
+            other.GetComponent<playerMove>().coin++;
             coinCounter.text = "Coins: " + coins.ToString();
             Destroy(gameObject);
-            Debug.Log("Mon-e");
         }
     }
 }
