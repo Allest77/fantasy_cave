@@ -6,36 +6,36 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 public class gameManager : MonoBehaviour {
-    //Timer Variables (made public):
+    //- Timer Variables (made public) -
     public TextMeshProUGUI time;
     public float timer = 120f;
     public float restartDelay = 1f;
 
     public Material material, material2;
     public float changeInterval = 0.01f;
-    public bool isUsingPower = true; //This bool is to make sure the IEnumerator is only fired once and not every frame.
+    public bool isUsingPower = true; //make sure the IEnumerator is only fired once and not every frame.
 
-    //Game State Variables (Paused, Complete, etc.):
+    //- Game State Variables (Paused, Complete, etc.) -
     bool gameHasEnded = false;
     public static bool GameIsPaused = false;
     private bool disablePause;
 
-    //Pause Variables:
+    //- Pause Variables -
     public GameObject pauseMenuUI;
     public GameObject completeLevelUI;
     public LayerMask UILayer;
 
-    //Reference to the player script:
+    //- Reference to player script -
     public playerMove player;
 
-    //Power Up Variables: List of References.
+    //- Power Up Variables: List of References -
     public BoxCollider yellowBlock;
 
-    //Score Display:
+    //- Score Display -
     public TextMeshProUGUI scoreText, highScoreText;
     int score = 0, highscore = 0;
 
-    //Awake is for when the player collides with something, add it to the score:
+    //- Awake is for when the player collides with something, add it to the score -
     private void Awake()
     {
         
@@ -49,11 +49,10 @@ public class gameManager : MonoBehaviour {
     }
 
     void Update() {
-        //Timer updates per frame and displays it through text.
+        //- Timer updates per frame and displays it through text -
         timer -= Time.deltaTime;
         time.text = "" + timer.ToString("f2");
 
-        //Press the escape key to pause the game.
         if (Input.GetKeyDown(KeyCode.Escape) && disablePause == false) {
             if (GameIsPaused) {
                 Resume(); //make a resume method
@@ -63,7 +62,7 @@ public class gameManager : MonoBehaviour {
             }
         }
 
-        //If the player has the power up, change their material.
+        //- If the player has the power up, change their material. -
         if (player.hasYellow) {
             material = material2;
             if (isUsingPower) {
@@ -92,14 +91,14 @@ public class gameManager : MonoBehaviour {
         scoreText.text = score.ToString() + " Score:";
     }
 
-    //Method when pressing button.
+    //- Method when pressing Resume button. -
     public void Resume() {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
-    //Method when pressing button.
+    //- Method when pressing button. -
     public void Paws() {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
@@ -110,11 +109,12 @@ public class gameManager : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    //Method when pressing button.
+    //- Method when pressing Quit button. -
     public void QuitGame() {
         Application.Quit();
     }
 
+    //- Disable Pause UI. -
     public void CompleteLevel() {
         completeLevelUI.SetActive(true);
         if (!Input.GetKey(KeyCode.Escape))
@@ -123,6 +123,7 @@ public class gameManager : MonoBehaviour {
         }
     }
 
+    //- When the timer reaches 0, load Game Over Method. - 
     private void FixedUpdate() {
         if (timer < 0) {
             GameOver();
