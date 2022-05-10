@@ -22,7 +22,6 @@ public class enemyController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, target.position, step);
     }
 
-    //Jump on the enemy to destroy it.
     public void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Ground")) {
             isGrounded = true;

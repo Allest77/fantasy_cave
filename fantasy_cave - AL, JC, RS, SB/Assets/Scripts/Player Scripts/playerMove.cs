@@ -38,6 +38,7 @@ public class playerMove : MonoBehaviour
         currentVelocity = gravity.y;
         desiredVelocity = currentVelocity;
         anim = GetComponent<Animator>();
+        coin = 0;
     }
 
     void ProcessMovement()
