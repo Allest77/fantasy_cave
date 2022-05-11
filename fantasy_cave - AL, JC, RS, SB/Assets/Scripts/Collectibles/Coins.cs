@@ -9,7 +9,6 @@ public class Coins : MonoBehaviour {
 
     void Start() {
         coins = 0;
-        coinCounter.text = "Coins: " + coins.ToString();
     }
 
     void Update() {
@@ -18,7 +17,6 @@ public class Coins : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.name == "Humanoid Salamander") {
-            other.GetComponent<playerMove>().coin++;
             coinCounter.text = "Coins: " + coins.ToString();
             Destroy(gameObject);
         }
