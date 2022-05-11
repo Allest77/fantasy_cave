@@ -5,6 +5,7 @@ using UnityEngine;
 public class destroyEnemy : MonoBehaviour {
 
     public BoxCollider enemyWeakPoint;
+    public AudioSource enemyHit;
 
     void Start() {
         enemyWeakPoint = GetComponent<BoxCollider>();
@@ -13,6 +14,7 @@ public class destroyEnemy : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            enemyHit.Play();
             Destroy(collision.gameObject);
         }
     }

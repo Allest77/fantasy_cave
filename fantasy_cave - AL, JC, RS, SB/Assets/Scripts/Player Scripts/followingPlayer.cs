@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class followingPlayer : MonoBehaviour {
     //Publics
-    public float smoothSpeed = 0.15f, smooth = 0.95f;
+    public float smoothSpeed = 0.15f;
     public playerMove player;
+    public Vector3 offset;
+
+    //How much to delay the camera following the player.
+    [Range(1, 10)]
+    public float smoothFactor;
 
     //Privates
     private Transform target;
-    private Vector3 offset;
 
     void Start() {
         player.rb = player.GetComponent<Rigidbody>();
@@ -17,9 +21,15 @@ public class followingPlayer : MonoBehaviour {
         offset = transform.position - target.position;
     }
 
-    void FixedUpdate()
-    {
-        Vector3 desiredPosition = transform.position = target.position + offset;
-        player.rb.MovePosition(transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed));
+    private void LateUpdate() {
+        Follow();
+    }
+
+    void Follow() {
+        Vector3 desiredPosition = target.position + offset;
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothFactor * Time.fixedDeltaTime);
+        transform.position = smoothedPosition;
+
+        transform.LookAt(target);
     }
 }

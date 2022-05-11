@@ -19,6 +19,7 @@ public class gameManager : MonoBehaviour {
     bool gameHasEnded = false;
     public static bool GameIsPaused = false;
     private bool disablePause;
+    private bool secret;
 
     //- Pause Variables -
     public GameObject pauseMenuUI;
@@ -35,6 +36,9 @@ public class gameManager : MonoBehaviour {
     public TextMeshProUGUI scoreText, highScoreText;
     int score = 0, highscore = 0;
 
+    //Reference to coins script.
+    public Coins coins;
+
     //- Awake is for when the player collides with something, add it to the score -
     private void Awake()
     {
@@ -46,6 +50,7 @@ public class gameManager : MonoBehaviour {
         player = GameObject.FindObjectOfType<playerMove>();
         yellowBlock = GetComponent<BoxCollider>();
         disablePause = false;
+        secret = false;
     }
 
     void Update() {
@@ -139,6 +144,14 @@ public class gameManager : MonoBehaviour {
             gameHasEnded = true;
             Debug.Log("GAME OVER!");
             Invoke("Restart", restartDelay);
+        }
+    }
+
+    public void HundredCoins() {
+        if (coins.coins >= 100) {
+            secret = true;
+            CompleteLevel();
+            EndGame();
         }
     }
 }

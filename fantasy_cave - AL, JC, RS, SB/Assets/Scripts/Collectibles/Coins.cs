@@ -6,6 +6,11 @@ using UnityEngine.UI;
 public class Coins : MonoBehaviour {
     public int coins;
     public Text coinCounter;
+    public gameManager theGame;
+    public AudioSource coinSFX;
+
+    //For secret win condition:
+    public GameObject completeLevelUI;
 
     void Start() {
         coins = 0;
@@ -18,6 +23,7 @@ public class Coins : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.name == "Humanoid Salamander") {
             coinCounter.text = "Coins: " + coins.ToString();
+            coinSFX.Play();
             Destroy(gameObject);
         }
     }

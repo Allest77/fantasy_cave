@@ -9,6 +9,8 @@ public class playerMove : MonoBehaviour
     public float speed = 7.5f, jumpHeight = 10.8f, jumpForce = 10.5f, jumpApex = 10.0f, gravityMod = 2.0f, fallSpeed;
     float currentVelocity, desiredVelocity;
     const float MovementPerSecond = 2.0f; //The currentVelocity will move to the desiredVelocity by this rate when called.
+    bool facingRight = true;
+    public AudioSource jumping;
 
     //Booleans: ground check & power ups.
     public bool isGrounded = true;
@@ -29,8 +31,7 @@ public class playerMove : MonoBehaviour
     public int coin;
     public Coins coinCounterText;
 
-    void Start()
-    {
+    void Start() {
         //Need player's rigidbody
         rb = GetComponent<Rigidbody>();
 
@@ -41,27 +42,34 @@ public class playerMove : MonoBehaviour
         coin = 0;
     }
 
-    void ProcessMovement()
-    {
+    void ProcessMovement() {
         // Move from currentVelocity to desiredVelocity in real-time. Smooth outcome.
         currentVelocity = Mathf.MoveTowards(
             currentVelocity,
             desiredVelocity,
             MovementPerSecond * Time.deltaTime);
     }
-    void Update()
-    {
+    void Update() {
         //Movement
         float hInput = Input.GetAxis("Horizontal");
         anim.SetFloat("isWalking", hInput);
         rb.transform.position = rb.transform.position + new Vector3(hInput * speed * Time.deltaTime, 0, 0);
         Debug.Log("POSITIONING");
 
+        //Flip the character's animation:
+        if (hInput < 0 && facingRight) {
+            Flip();
+        }
+        else if (hInput > 0 && !facingRight) {
+            Flip();
+        }
+
         //Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             isGrounded = false;
             anim.SetBool("isJumping", true);
+            jumping.Play();
             rb.velocity = new Vector3(0.0f, rb.velocity.y, 0.0f);
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
             ProcessMovement();
@@ -81,6 +89,11 @@ public class playerMove : MonoBehaviour
         {
             anim.SetBool("isAttacking", false);
         }
+    }
+
+    void Flip() {
+        facingRight = !facingRight; //if facing right is true, it will be false.
+        transform.Rotate(0f, 180f, 0f);
     }
 
     //Ground Check Method
